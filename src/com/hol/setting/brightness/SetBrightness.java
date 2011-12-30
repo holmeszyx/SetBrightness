@@ -16,13 +16,23 @@ public class SetBrightness {
 	public static final String ACTURE_BRIGHTNESS = "actual_brightness";
 	public static final String BRIGHTNESS = "brightness";
 	public static final String MAX_BRIGHTNESS = "max_brightness";
+	public static final String COMMAND_INFORMATION = "i";
 
 	public static void main (String[] args) throws SetBrightnessException, IOException{
 		int max = DEFAULT_MAX;
 		int acture = 0;
 		int brightness = 0;
+		boolean seeInformation = false;
 		if (args.length > 0){
-			brightness = Integer.valueOf(args[0]);
+			if (args[0].equals(COMMAND_INFORMATION)){ 
+				seeInformation = true;
+			}else{
+				brightness = Integer.valueOf(args[0]);
+			}
+		}else{
+			out("Please enter a number greater than or equal to 0 as brightness or a letter 'i' to see brightness information.");
+			out("if brightness is 0. it will use default brightness half of max or " + DEFAULT_BRIGHTNESS);
+			return;
 		}
 		File configurationDir = new File(CONFIGURATION_DIR);
 		if (!configurationDir.isDirectory()){
@@ -50,6 +60,10 @@ public class SetBrightness {
 		out("max brightness is " + max);
 		acture = getFileContentAsNumber(actureBrightnessFile);
 		out("acture brightness is " + acture);
+		if (seeInformation){
+			return;
+		}
+		
 		if (brightness == 0){
 			if (DEFAULT_BRIGHTNESS * 2 > max){
 				brightness = max / 2;
