@@ -31,7 +31,7 @@ public class SetBrightness {
 			}
 		}else{
 			out("Please enter a number greater than or equal to 0 as brightness or a letter 'i' to see brightness information.");
-			out("if brightness is 0. it will use default brightness half of max or " + DEFAULT_BRIGHTNESS);
+			out("if brightness is 0. It will use the half of maximum or " + DEFAULT_BRIGHTNESS + " as default brightness.");
 			return;
 		}
 		File configurationDir = new File(CONFIGURATION_DIR);
